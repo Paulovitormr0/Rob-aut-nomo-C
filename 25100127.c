@@ -10,15 +10,18 @@ Caminho * InicializarCaminho(const char *Sequencia, int xInicial, int yInicial){
     Caminho *Rota = malloc(sizeof(*Rota));
 
     Posicao *inicio = malloc(sizeof(*inicio));
+
     inicio -> Proximo = NULL;
     inicio->X = xInicial;
     inicio->Y = yInicial;
 
     Posicao *historico = inicio;
+
     Rota->Inicio = inicio;
     Rota->Historico = inicio;
     Rota->Instrucoes = NULL;
     Rota->N = 0;
+
     int yAux = yInicial;
     int xAux = xInicial;
     Posicao *ultimaPos = inicio; //guardar sempre o final da lista
@@ -39,14 +42,41 @@ Caminho * InicializarCaminho(const char *Sequencia, int xInicial, int yInicial){
             xAux--;
             break;
         default:
-            printf("Caractere invalido");//Deixar mais bonitinha essa msg
+            free(Rota);
+            free(inicio);
 
+            Rota = NULL;
+            Rota = NULL;
+
+            printf("Caractere invalido");//Deixar mais bonitinha essa msg
+                        
+            return(NULL);
+            
             break;
         }//switch case para mover o robo
+
             Comando *novoCmd = malloc(sizeof(*novoCmd));
+
             novoCmd->Direcao = Sequencia[i];
             novoCmd->Proximo = NULL;
-    } 
+
+        if(ultimoCmd == NULL){
+            Rota->Instrucoes = novoCmd;
+        }else{
+            ultimoCmd->Proximo = novoCmd;
+        }
+
+    
+        novoCmd->Proximo = NULL;
+
+        Posicao *novaPos = malloc(sizeof(*novaPos));
+        ultimaPos->Proximo = novaPos;
+        novaPos        
+        novaPos->X = xAux;
+    
+        novaPos->Y = yAux;
+        novaPos->Proximo = NULL;
+    }
 
 }
 
